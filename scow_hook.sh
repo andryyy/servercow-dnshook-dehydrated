@@ -45,8 +45,8 @@ function deploy_challenge() {
 
   # Start with SLD=SIGN_DOMAIN and break down SLD until it equals to the second level domain
   local SLD=${SIGN_DOMAIN}
-  until [[ -z $(dig ns ${SLD} +short | grep -viE 'ns.+.servercow.de') ]]; do
-  #until [[ ! -z $(dig ns ${SLD} +short | grep -iE 'ns.+\.servercow\.de') ]]; do
+  #until [[ -z $(dig ns ${SLD} +short | grep -viE 'ns.+.servercow.de') ]]; do
+  until [[ ! -z $(dig ns ${SLD} +short | grep -iE 'ns.+\.servercow\.de') ]]; do
     SLD=${SLD#*.}
     if [ $(echo ${SLD} | awk -F. '{print NF-1}') -lt 1 ]; then
       echo -e "\n\t ERROR: Cannot determine root domain with a Servercow NS record for ${SIGN_DOMAIN} \n"
@@ -78,8 +78,8 @@ function clean_challenge() {
 
   # Start with SLD=SIGN_DOMAIN and break down SLD until it equals to the second level domain
   local SLD=${SIGN_DOMAIN}
-  until [[ -z $(dig ns ${SLD} +short | grep -viE 'ns.+.servercow.de') ]]; do
-  #until [[ ! -z $(dig ns ${SLD} +short | grep -iE 'ns.+\.servercow\.de') ]]; do
+  #until [[ -z $(dig ns ${SLD} +short | grep -viE 'ns.+.servercow.de') ]]; do
+  until [[ ! -z $(dig ns ${SLD} +short | grep -iE 'ns.+\.servercow\.de') ]]; do
     SLD=${SLD#*.}
     if [ $(echo ${SLD} | awk -F. '{print NF-1}') -lt 1 ]; then
       echo -e "\n\t ERROR: Cannot determine root domain with a Servercow NS record for ${SIGN_DOMAIN} \n"
